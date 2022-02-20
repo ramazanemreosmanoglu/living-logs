@@ -9,10 +9,12 @@ import json
 
 HOME = Path(os.environ['HOME'])
 DEFAULT_JOURNAL_FILE = HOME / ".myjournal.txt"
+
 EMPTY_CONFIG = {
-    'journal_file': DEFAULT_JOURNAL_FILE,
+    'journal_file': str(DEFAULT_JOURNAL_FILE),
     'dateformat': '%d-%m-%Y',
 }
+
 CONFIG_PATH = HOME / '.config/livinglogs'
 CONFIG_FILE = CONFIG_PATH / 'config.json'
 
@@ -39,7 +41,7 @@ class Config:
     def _generate_config(self):
         """Generate a new config with default values."""
 
-        with open(self.file, 'a') as file:
+        with open(self.file, 'w') as file:
             json.dump(EMPTY_CONFIG, file)
 
     def _load_config(self):
